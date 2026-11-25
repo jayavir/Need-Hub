@@ -1,22 +1,11 @@
 {
-  "name": "NeedHub Global",
-  "short_name": "NeedHub",
-  "description": "Global Daily & Home Needs Platform - Cleaning, Home Cook, Repair & Handyman",
-  "start_url": "/Need-Hub/",
-  "scope": "/Need-Hub/",
+  "background_color": "#ffffff",
+  "dir": "ltr",
   "display": "standalone",
-  "background_color": "#090d16",
-  "theme_color": "#0f172a",
-  "icons": [
-    {
-      "src": "https://jayavir.github.io/Need-Hub/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://jayavir.github.io/Need-Hub/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "name": "NeedHub Global",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "NeedHub",
+  "start_url": "/",
+  "theme_color": "#0f172a"
 }
