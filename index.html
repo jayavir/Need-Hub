@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeedHub Global - Home Repair, Cleaning, Cooking &amp; Daily Services</title>
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { margin: 0; background: #090d16; color: #1e293b; }
+    .container { max-width: 960px; margin: 0 auto; padding: 12px; padding-bottom: 85px; }
+
+    /* Role Selection Login Screen */
+    #roleScreen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 18px;
+    }
+    .role-card {
+      background: #fff; border-radius: 18px; padding: 24px 20px; width: 100%; max-width: 470px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.5); text-align: center;
+    }
+    .brand-badge {
+      background: linear-gradient(90deg, #f59e0b, #ea580c); color: #fff; font-weight: 900;
+      padding: 5px 14px; border-radius: 20px; font-size: 11px; display: inline-block; margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .country-selector-box {
+      background: #f1f5f9; padding: 10px 12px; border-radius: 12px; margin-bottom: 14px;
+      border: 1.5px solid #cbd5e1; text-align: left;
+    }
+    .country-selector-box label { font-size: 11.5px; font-weight: 700; color: #334155; margin-bottom: 4px; display: block; }
+    .country-selector-box select { margin: 0; font-weight: 700; background: #fff; }
+
+    .role-lang-bar { display: flex; justify-content: center; gap: 6px; margin-bottom: 14px; }
+    .role-lang-bar button {
+      background: #e2e8f0; color: #0f172a; border: none; padding: 5px 12px;
+      border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .role-lang-bar button.active { background: #1e3a8a; color: #fff; }
+
+    .role-btn {
+      width: 100%; border: 2px solid #e2e8f0; background: #f8fafc; border-radius: 12px;
+      padding: 13px; margin-bottom: 11px; text-align: left; cursor: pointer;
+      display: flex; align-items: center; gap: 14px; transition: 0.2s;
+    }
+    .role-btn:hover { border-color: #f59e0b; background: #fffbeb; }
+    .role-btn .r-icon { font-size: 28px; }
+    .role-btn strong { display: block; font-size: 14.5px; color: #0f172a; }
+    .role-btn small { display: block; font-size: 11.5px; color: #475569; margin-top: 2px; }
+
+    /* Header */
+    .topbar {
+      background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff;
+      padding: 12px 16px; border-radius: 14px; display: flex;
+      justify-content: space-between; align-items: center; margin-bottom: 14px;
+      border-bottom: 3px solid #f59e0b; flex-wrap: wrap; gap: 8px;
+    }
+    .topbar h1 { margin: 0; font-size: 19px; color: #fbbf24; letter-spacing: 0.5px; }
+    .topbar p { margin: 2px 0 0; font-size: 11px; color: #cbd5e1; }
+    .live-dot {
+      display: inline-block; width: 8px; height: 8px; background: #22c55e;
+      border-radius: 50%; margin-right: 4px; box-shadow: 0 0 6px #22c55e;
+    }
+    .top-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .top-country-select {
+      width: auto; margin: 0; padding: 4px 8px; font-size: 11.5px; font-weight: 700;
+      background: #334155; color: #fff; border: 1px solid #475569; border-radius: 6px;
+    }
+    .lang-group button, .switch-role-btn {
+      background: #334155; color: #fff; border: 1px solid #475569; padding: 5px 8px;
+      border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600;
+    }
+    .lang-group button.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
+    .switch-role-btn { background: #dc2626; border-color: #dc2626; }
+
+    /* Cards & Forms */
+    .card {
+      background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+    .card h3 {
+      margin: 0 0 12px; font-size: 15px; color: #0f172a;
+      border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 4px; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; margin-bottom: 10px; border: 1px solid #cbd5e1;
+      border-radius: 8px; font-size: 14px; background: #f8fafc;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+    /* Lock Banner */
+    .lock-banner {
+      background: #fef2f2; border: 2px solid #dc2626; border-radius: 12px;
+      padding: 18px; text-align: center; margin-bottom: 14px;
+    }
+    .lock-banner h2 { margin: 0 0 6px; color: #991b1b; font-size: 18px; }
+    .lock-banner p { margin: 0 0 12px; font-size: 13px; color: #7f1d1d; line-height: 1.5; }
+
+    /* Postal Code Banner */
+    .pin-box {
+      background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 10px;
+      padding: 12px; margin-bottom: 14px;
+    }
+    .pin-row { display: flex; gap: 8px; align-items: center; }
+    .pin-row input { margin-bottom: 0; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .pin-status {
+      margin-top: 8px; padding: 8px 10px; border-radius: 8px; font-size: 12.5px;
+      font-weight: 700; display: none;
+    }
+    .pin-ok { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .pin-warn { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .pin-no { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+    /* Service Grid */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .srv-box {
+      border: 2px solid #e2e8f0; border-radius: 10px; padding: 11px 8px; text-align: center;
+      cursor: pointer; transition: 0.2s; background: #f8fafc;
+    }
+    .srv-box.selected { border-color: #f59e0b; background: #fffbeb; }
+    .srv-box .icon { font-size: 25px; display: block; margin-bottom: 4px; }
+    .srv-box strong { font-size: 12.5px; color: #0f172a; display: block; }
+    .srv-box small { font-size: 10.5px; color: #64748b; }
+
+    /* Buttons */
+    .btn {
+      width: 100%; padding: 11px 14px; border: none; border-radius: 8px; font-size: 13.5px;
+      font-weight: 700; cursor: pointer; transition: 0.2s;
+    }
+    .btn-primary { background: #1e3a8a; color: #fff; }
+    .btn-success { background: #15803d; color: #fff; }
+    .btn-warning { background: #d97706; color: #fff; }
+    .btn-wa { background: #16a34a; color: #fff; }
+    .btn-danger { background: #dc2626; color: #fff; }
+
+    /* Job & Tech Lists */
+    .job-item {
+      border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; margin-bottom: 10px; background: #f8fafc;
+    }
+    .badge { padding: 3px 9px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+    .badge-new { background: #fef3c7; color: #92400e; }
+    .badge-accepted { background: #dbeafe; color: #1e40af; }
+    .badge-done { background: #dcfce7; color: #166534; }
+    .badge-locked { background: #fee2e2; color: #991b1b; }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b;
+      display: flex; justify-content: space-around; padding: 8px 4px; border-top: 2px solid #f59e0b; z-index: 99;
+    }
+    .bottom-nav button {
+      background: none; border: none; color: #cbd5e1; font-size: 11px; font-weight: 700;
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .bottom-nav button.active { color: #fbbf24; }
+
+    /* Print Bill Receipt Modal */
+    #receiptModal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 999; align-items: center; justify-content: center; padding: 14px;
+    }
+    .receipt-box {
+      background: #fff; width: 100%; max-width: 440px; border-radius: 12px; padding: 20px;
+      border-top: 6px solid #1e3a8a; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 600px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body * { visibility: hidden; }
+      #receiptPrintArea, #receiptPrintArea * { visibility: visible; }
+      #receiptPrintArea { position: fixed; left: 0; top: 0; width: 100%; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STEP 1: GLOBAL ROLE & COUNTRY SELECTION SCREEN -->
+  <div id="roleScreen">
+    <div class="role-card">
+      <div class="brand-badge">🌍 GLOBAL DAILY &amp; HOME NEEDS HUB</div>
+      <h2 style="margin:4px 0;color:#0f172a;font-size:24px;">🌐 NeedHub</h2>
+      <p style="font-size:12px;color:#64748b;margin:0 0 12px;">Home Repair • House Cleaning • Home Cook • Gardening • Handyman</p>
+
+      <div class="country-selector-box">
+        <label>📍 Select Your Country / Region:</label>
+        <select id="loginCountrySelect" onchange="changeCountry(this.value)">
+          <option value="IN">🇮🇳 India (INR ₹)</option>
+          <option value="NZ">🇳🇿 New Zealand (NZD $)</option>
+          <option value="AU">🇦🇺 Australia (AUD $)</option>
+          <option value="AE">🇦🇪 UAE / Dubai (AED)</option>
+          <option value="US">🇺🇸 United States (USD $)</option>
+          <option value="UK">🇬🇧 United Kingdom (GBP £)</option>
+          <option value="CA">🇨🇦 Canada (CAD $)</option>
+        </select>
+      </div>
+
+      <div class="role-lang-bar">
+        <button id="rLangEn" class="active" onclick="setLang('en')">English</button>
+        <button id="rLangGu" onclick="setLang('gu')">ગુજરાતી</button>
+        <button id="rLangHi" onclick="setLang('hi')">हिन्दी</button>
+      </div>
+
+      <div class="role-btn" onclick="enterRole('customer')">
+        <span class="r-icon">🏠</span>
+        <div>
+          <strong id="tCustRoleTitle">I Need a Service (Customer)</strong>
+          <small id="tCustRoleSub">Book Cleaning, Home Cook, Electrician, Plumber, Handyman &amp; more</small>
+        </div>
+      </div>
+
+      <div class="role-btn" onclick="enterRole('partner')">
+        <span class="r-icon">👷</span>
+        <div>
+          <strong id="tPartRoleTitle">I am a Worker / Service Partner</strong>
+          <small id="tPartRoleSub">Open your Online Shop — 30-Day Trial then 0% Commission Annual Plan</small>
+        </div>
+      </div>
+
+      <div class="role-btn" onclick="openAdminPrompt()">
+        <span class="r-icon">🔐</span>
+        <div>
+          <strong id="tAdmRoleTitle">Global Admin Panel (Owner)</strong>
+          <small id="tAdmRoleSub">Manage countries, partner activations, postal codes &amp; bookings</small>
+        </div>
+      </div>
+
+      <div id="adminPinBox" style="display:none;margin-top:10px;text-align:left;background:#f1f5f9;padding:12px;border-radius:10px;">
+        <label>Enter Admin PIN:</label>
+        <div style="display:flex;gap:8px;">
+          <input type="password" id="adminPinInput" placeholder="PIN" maxlength="4" style="margin:0;" />
+          <button class="btn btn-primary" style="width:auto;" onclick="verifyAdmin()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: MAIN GLOBAL APP CONTAINER -->
+  <div id="mainApp" style="display:none;">
+    <div class="container">
+      <!-- TOP HEADER -->
+      <div class="topbar">
+        <div>
+          <h1>🌐 NEEDHUB GLOBAL</h1>
+          <p><span class="live-dot"></span><span id="roleSubBadge">All Daily &amp; Home Needs • Live Cloud</span></p>
+        </div>
+        <div class="top-actions">
+          <select id="topCountrySelect" class="top-country-select" onchange="changeCountry(this.value)">
+            <option value="IN">🇮🇳 IN (₹)</option>
+            <option value="NZ">🇳🇿 NZ ($)</option>
+            <option value="AU">🇦🇺 AU ($)</option>
+            <option value="AE">🇦🇪 UAE (AED)</option>
+            <option value="US">🇺🇸 US ($)</option>
+            <option value="UK">🇬🇧 UK (£)</option>
+            <option value="CA">🇨🇦 CA ($)</option>
+          </select>
+          <div class="lang-group">
+            <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+            <button id="btnGu" onclick="setLang('gu')">ગુજ</button>
+            <button id="btnHi" onclick="setLang('hi')">हिन्दी</button>
+          </div>
+          <button id="btnSwitchRole" class="switch-role-btn" onclick="switchRoleScreen()">Role</button>
+        </div>
+      </div>
+
+      <!-- CUSTOMER VIEW: BOOK ANY DAILY / HOME SERVICE -->
+      <div id="secCustBook" class="app-section">
+        <div class="card">
+          <!-- POSTAL / ZIP CODE CHECKER -->
+          <div class="pin-box">
+            <label id="lblPinCheck" style="color:#0f172a;font-size:13px;">📍 Enter your Postal / ZIP / Pincode to check availability in your area:</label>
+            <div class="pin-row">
+              <input type="text" id="custPincode" maxlength="10" placeholder="e.g. 1010 (NZ) / 2000 (AU) / 394180 (IN)" oninput="if(this.value.trim().length>=4) checkPincodeAvailability();" />
+              <button id="btnCheckPin" class="btn btn-primary" style="width:auto;white-space:nowrap;" onclick="checkPincodeAvailability()">Check Area</button>
+            </div>
+            <div id="pinStatusResult" class="pin-status"></div>
+          </div>
+
+          <h3 id="lblSelectSrv">1. Choose What You Need Today</h3>
+          <div class="service-grid" id="dynamicServiceGrid"></div>
+
+          <h3 id="lblCustForm">2. Your Contact &amp; Address Details</h3>
+          <div class="grid-2">
+            <div>
+              <label id="lblCustName">Full Name *</label>
+              <input type="text" id="custName" placeholder="e.g. Aarav Patel / John Smith" />
+            </div>
+            <div>
+              <label id="lblCustMob">Phone / WhatsApp Number (with Country Code) *</label>
+              <input type="tel" id="custMobile" placeholder="e.g. +64 21 123 4567 / +91 9876543210" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label id="lblCustCity">City / Suburb / Emirate</label>
+              <input type="text" id="custArea" placeholder="e.g. Auckland / Sydney / Dubai Marina / Surat" />
+            </div>
+            <div>
+              <label id="lblCustSlot">Preferred Date &amp; Time Slot</label>
+              <input type="text" id="custSlot" value="Today / Urgent (Within 2-4 Hours)" />
+            </div>
+          </div>
+
+          <div>
+            <label id="lblCustAddr">House/Apt No., Street &amp; Exact Requirement (e.g. Indian cooking for 4 people, Deep cleaning, Tap repair)</label>
+            <textarea id="custProblem" rows="2" placeholder="Describe your work or meal/cleaning requirement..."></textarea>
+          </div>
+
+          <div style="background:#fffbeb;border:1px solid #f59e0b;padding:10px;border-radius:8px;margin-bottom:12px;font-size:13px;">
+            <strong id="lblSelSrvTitle">Selected Need:</strong> <span id="selectedSrvName">House &amp; Deep Cleaning</span> |
+            <strong id="lblSelFeeTitle">Starting Base Charge:</strong> <span id="selectedSrvFee" style="color:#b45309;font-weight:700;">$49</span>
+          </div>
+
+          <div class="grid-2">
+            <button id="btnBookNow" class="btn btn-primary" onclick="bookService()">✅ Confirm Live Booking</button>
+            <button id="btnBookWA" class="btn btn-wa" onclick="bookViaWhatsApp()">📲 Instant WhatsApp Concierge</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER VIEW: MY BOOKINGS & GLOBAL PDF INVOICE -->
+      <div id="secCustOrders" class="app-section" style="display:none;">
+        <div class="card">
+          <h3>
+            <span id="lblMyOrdersTitle">📋 My Live Bookings &amp; Digital Invoice</span>
+            <button class="btn btn-primary" style="width:auto;padding:5px 10px;font-size:11px;" onclick="syncFromCloud()">🔄 Refresh</button>
+          </h3>
+          <div id="custOrdersList"></div>
+        </div>
+      </div>
+
+      <!-- PARTNER VIEW: LIVE JOBS (LOCKED UNTIL TRIAL/PLAN IS ACTIVATED) -->
+      <div id="secPartnerJobs" class="app-section" style="display:none;">
+        <div id="partnerLockScreen" class="card">
+          <div class="lock-banner">
+            <h2 id="lblLockTitle">🔒 Partner Live Jobs Tab is Locked</h2>
+            <p id="lblLockDesc">
+              To protect verified workers and ensure genuine leads, live customer bookings and contact numbers stay locked until your <strong>30-Day Trial Plan</strong> is activated.<br/>
+              Register your Online Shop below or enter your registered phone number to check activation status:
+            </p>
+            <div style="max-width:340px;margin:0 auto 10px;display:flex;gap:8px;">
+              <input type="tel" id="partnerLoginMob" placeholder="Enter registered phone number" style="margin:0;text-align:center;font-weight:700;" />
+              <button class="btn btn-primary" style="width:auto;" onclick="checkPartnerUnlock()">Check</button>
+            </div>
+            <div id="partnerUnlockStatus" style="font-size:12.5px;font-weight:700;color:#991b1b;margin-bottom:10px;"></div>
+            <div class="grid-2" style="max-width:460px;margin:0 auto;">
+              <button id="btnNewPartnerReg" class="btn btn-success" onclick="showSection('secPartnerProfile', 'btnNav2')">📝 Open Online Shop</button>
+              <button id="btnPayTrialLock" class="btn btn-warning" onclick="sendPaymentProofWA()">💳 Activate 30-Day Trial</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="partnerUnlockedBox" class="card" style="display:none;">
+          <h3>
+            <span id="lblLiveJobsTitle">🔔 Live Customer Requests (Unlocked Partner)</span>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <span id="partnerJobBadge" style="font-size:12px;color:#15803d;font-weight:700;">0 Jobs</span>
+              <button class="btn btn-primary" style="width:auto;padding:4px 9px;font-size:11px;" onclick="syncFromCloud()">🔄 Sync</button>
+            </div>
+          </h3>
+          <div id="partnerJobsList"></div>
+        </div>
+      </div>
+
+      <!-- PARTNER VIEW: GLOBAL ONLINE SHOP REGISTRATION -->
+      <div id="secPartnerProfile" class="app-section" style="display:none;">
+        <div class="card">
+          <h3 id="lblPartnerRegTitle">👷 Open Your NeedHub Online Shop (0% Commission)</h3>
+          <div class="grid-2">
+            <div>
+              <label id="lblTechName">Your Name / Business Name *</label>
+              <input type="text" id="techName" placeholder="e.g. Priya Home Kitchen / Kiwi Handyman Services" />
+            </div>
+            <div>
+              <label id="lblTechMob">Phone / WhatsApp Number (with Country Code) *</label>
+              <input type="tel" id="techMobile" placeholder="e.g. +64 21 123 4567 / +91 9825012345" />
+            </div>
+          </div>
+          <div class="grid-3">
+            <div>
+              <label id="lblTechCat">Primary Service Category</label>
+              <select id="techSkill">
+                <option value="House & Deep Cleaning">🧹 House &amp; Deep Cleaning</option>
+                <option value="Home Cook / Meal Prep">🍳 Home Cook / Meal Prep</option>
+                <option value="Electrician">⚡ Electrician</option>
+                <option value="Plumber">🚰 Plumber</option>
+                <option value="Handyman / Fabrication">🛠️ Handyman / Fabrication</option>
+                <option value="Carpenter / Furniture">🪚 Carpenter / Furniture</option>
+                <option value="AC & Appliance Repair">❄️ AC &amp; Appliance Repair</option>
+                <option value="Gardening & Lawn Care">🌿 Gardening &amp; Lawn Care</option>
+              </select>
+            </div>
+            <div>
+              <label id="lblTechCity">Country &amp; City / Suburb *</label>
+              <input type="text" id="techArea" placeholder="e.g. Auckland, NZ / Melbourne, AU / Surat, IN" />
+            </div>
+            <div>
+              <label id="lblTechPin">Service Postal / ZIP / Pincode *</label>
+              <input type="text" id="techPincode" maxlength="10" placeholder="e.g. 1010 / 3000 / 394180" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <button id="btnRegTech" class="btn btn-primary" onclick="registerTech()">1. Submit Partner Registration</button>
+            <button id="btnSendProof" class="btn btn-wa" onclick="sendPaymentProofWA()">2. Request Trial Activation via WhatsApp</button>
+          </div>
+
+          <div id="partnerPlanBox" style="background:#fffbeb;border:1.5px solid #f59e0b;padding:14px;border-radius:10px;margin-top:14px;font-size:13px;line-height:1.6;"></div>
+        </div>
+      </div>
+
+      <!-- ADMIN VIEW: GLOBAL DASHBOARD -->
+      <div id="secAdminDash" class="app-section" style="display:none;">
+        <div class="card">
+          <h3>
+            <span>📊 NeedHub Global Owner Dashboard</span>
+            <button class="btn btn-primary" style="width:auto;padding:4px 9px;font-size:11px;" onclick="syncFromCloud()">🔄 Refresh</button>
+          </h3>
+          <div class="grid-3" style="text-align:center;margin-bottom:14px;">
+            <div style="background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #cbd5e1;">
+              <small>Total Global Bookings</small>
+              <h2 id="statTotalJobs" style="margin:4px 0;color:#1e3a8a;">0</h2>
+            </div>
+            <div style="background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #86efac;">
+              <small>Completed Jobs</small>
+              <h2 id="statGrossAmt" style="margin:4px 0;color:#15803d;">0</h2>
+            </div>
+            <div style="background:#fffbeb;padding:10px;border-radius:8px;border:1px solid #fcd34d;">
+              <small>Unlocked Partners</small>
+              <h2 id="statCommission" style="margin:4px 0;color:#b45309;">0 / 0</h2>
+            </div>
+          </div>
+
+          <h3>🔐 Global Partner Activation (Unlock / Lock Online Shops)</h3>
+          <div id="adminTechList" style="margin-bottom:14px;"></div>
+
+          <h3>📍 Add Active Global Postal / ZIP / Pincode</h3>
+          <div class="grid-3" style="margin-bottom:10px;">
+            <input type="text" id="adminNewPin" maxlength="10" placeholder="Postal/ZIP Code (e.g. 1010, 2000, 394180)" style="margin:0;" />
+            <input type="text" id="adminNewPinArea" placeholder="City & Country (e.g. Auckland, NZ)" style="margin:0;" />
+            <button class="btn btn-primary" onclick="addAdminPincode()">➕ Activate Zone</button>
+          </div>
+          <div id="adminPincodeList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC BOTTOM NAVIGATION -->
+    <div class="bottom-nav" id="dynamicBottomNav"></div>
+  </div>
+
+  <!-- DIGITAL / PDF INVOICE MODAL -->
+  <div id="receiptModal">
+    <div class="receipt-box" id="receiptPrintArea">
+      <div style="text-align:center;border-bottom:2px dashed #cbd5e1;padding-bottom:10px;margin-bottom:12px;">
+        <h2 style="margin:0;color:#1e3a8a;font-size:20px;">🌐 NEEDHUB GLOBAL</h2>
+        <p style="margin:2px 0;font-size:11.5px;color:#475569;">All Daily &amp; Home Services • Verified Partners</p>
+        <p style="margin:2px 0;font-size:11.5px;font-weight:700;color:#0f172a;">Global Support: +91 91067 43538</p>
+      </div>
+      <div id="receiptContent" style="font-size:13px;line-height:1.65;color:#1e293b;"></div>
+      <div class="no-print" style="display:flex;gap:8px;margin-top:14px;">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Save PDF / Print</button>
+        <button class="btn btn-wa" id="btnShareBillWA">📲 Share Invoice</button>
+        <button class="btn" style="background:#e2e8f0;color:#0f172a;" onclick="closeReceipt()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DB_URL = "https://skyline-homecare-default-rtdb.asia-southeast1.firebasedatabase.app/needhub";
+    let activeRole = 'customer';
+    let currentLang = 'en';
+    let currentCountry = 'IN';
+    let currentService = 'House & Deep Cleaning';
+    let currentFee = 299;
+    let liveOrders = [];
+    let liveTechs = [];
+    let livePincodes = [];
+    let savedPartnerMobile = localStorage.getItem('needhub_partner_mob') || '';
+
+    const COUNTRY_CONFIG = {
+      IN: {
+        name: "India", flag: "🇮🇳", symbol: "₹",
+        trialText: "₹99 (30-Day Trial) → ₹3,599/Year (Only ₹300/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. 394180 (Surat) / 380015 (Ahmedabad) / 400001 (Mumbai)",
+        rates: { clean: 299, cook: 399, elec: 149, plumb: 149, handy: 199, carp: 199, ac: 249, garden: 299 }
+      },
+      NZ: {
+        name: "New Zealand", flag: "🇳🇿", symbol: "NZ$",
+        trialText: "NZ$9 (30-Day Trial) → NZ$149/Year (~NZ$12.5/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. 1010 (Auckland) / 6011 (Wellington) / 8011 (Christchurch)",
+        rates: { clean: 45, cook: 50, elec: 75, plumb: 75, handy: 65, carp: 70, ac: 80, garden: 55 }
+      },
+      AU: {
+        name: "Australia", flag: "🇦🇺", symbol: "A$",
+        trialText: "A$9 (30-Day Trial) → A$149/Year (~A$12.5/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. 2000 (Sydney) / 3000 (Melbourne) / 4000 (Brisbane)",
+        rates: { clean: 50, cook: 55, elec: 80, plumb: 80, handy: 70, carp: 75, ac: 85, garden: 60 }
+      },
+      AE: {
+        name: "UAE", flag: "🇦🇪", symbol: "AED ",
+        trialText: "AED 29 (30-Day Trial) → AED 499/Year (~AED 41/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. Dubai Marina / Deira / Sharjah / Abu Dhabi",
+        rates: { clean: 60, cook: 75, elec: 90, plumb: 90, handy: 85, carp: 95, ac: 110, garden: 80 }
+      },
+      US: {
+        name: "USA", flag: "🇺🇸", symbol: "$",
+        trialText: "$9 (30-Day Trial) → $149/Year (~$12.5/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. 10001 (NY) / 90001 (LA) / 75001 (Dallas)",
+        rates: { clean: 55, cook: 60, elec: 85, plumb: 85, handy: 75, carp: 80, ac: 90, garden: 65 }
+      },
+      UK: {
+        name: "UK", flag: "🇬🇧", symbol: "£",
+        trialText: "£9 (30-Day Trial) → £129/Year (~£10.7/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. SW1A 1AA (London) / M1 1AE (Manchester)",
+        rates: { clean: 40, cook: 45, elec: 65, plumb: 65, handy: 55, carp: 60, ac: 70, garden: 45 }
+      },
+      CA: {
+        name: "Canada", flag: "🇨🇦", symbol: "C$",
+        trialText: "C$9 (30-Day Trial) → C$149/Year (~C$12.5/month Online Shop • 0% Commission)",
+        pinPlaceholder: "e.g. M5V 2T6 (Toronto) / V6B 1A1 (Vancouver)",
+        rates: { clean: 50, cook: 55, elec: 80, plumb: 80, handy: 70, carp: 75, ac: 85, garden: 60 }
+      }
+    };
+
+    const SERVICES_LIST = [
+      { key: 'clean', icon: '🧹', title: 'House & Deep Cleaning', subGu: 'ઘરકામ & સફાઈ', subHi: 'घर की सफाई', subEn: 'Home & Deep Clean' },
+      { key: 'cook', icon: '🍳', title: 'Home Cook / Meal Prep', subGu: 'રસોઈ / ટિફિન', subHi: 'खाना बनाना / रसोई', subEn: 'Daily / Party Cook' },
+      { key: 'elec', icon: '⚡', title: 'Electrician', subGu: 'વાયરિંગ, સ્વીચ, પંખા', subHi: 'वायरिंग, स्विच, पंखा', subEn: 'Wiring & Repairs' },
+      { key: 'plumb', icon: '🚰', title: 'Plumber', subGu: 'નળ, પાઈપ લીકેજ', subHi: 'नल, पाइप लीकेज', subEn: 'Pipes, Taps & Leaks' },
+      { key: 'handy', icon: '🛠️', title: 'Handyman / Welding', subGu: 'ફેબ્રિકેશન & રિપેર', subHi: 'वेल्डिंग & रिपेयर', subEn: 'General Fix & Metal' },
+      { key: 'carp', icon: '🪚', title: 'Carpenter / Furniture', subGu: 'દરવાજા, કબાટ રિપેર', subHi: 'दरवाजा, अलमारी', subEn: 'Wood & Furniture' },
+      { key: 'ac', icon: '❄️', title: 'AC & Appliance Repair', subGu: 'AC, ફ્રીજ, વોશિંગ મશીન', subHi: 'AC, फ्रिज, वॉशिंग मशीन', subEn: 'Cooling & Appliances' },
+      { key: 'garden', icon: '🌿', title: 'Gardening & Lawn Care', subGu: 'ગાર્ડન & લૉન સફાઈ', subHi: 'गार्डन & लॉन केयर', subEn: 'Lawn Mowing & Yard' }
+    ];
+
+    function renderServiceCards() {
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      const grid = document.getElementById('dynamicServiceGrid');
+      if (!grid) return;
+
+      grid.innerHTML = SERVICES_LIST.map((s, i) => {
+        const price = cfg.rates[s.key];
+        const subText = currentLang === 'gu' ? s.subGu : (currentLang === 'hi' ? s.subHi : s.subEn);
+        const isSel = (i === 0);
+        if (isSel) {
+          currentService = s.title;
+          currentFee = price;
+        }
+        return `
+          <div class="srv-box ${isSel ? 'selected' : ''}" onclick="selectService(this, '${s.title}', ${price})">
+            <span class="icon">${s.icon}</span>
+            <strong>${s.title}</strong>
+            <small>${subText} (${cfg.symbol}${price})</small>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('selectedSrvName').innerText = currentService;
+      document.getElementById('selectedSrvFee').innerText = cfg.symbol + currentFee;
+    }
+
+    function changeCountry(code) {
+      currentCountry = code;
+      document.getElementById('loginCountrySelect').value = code;
+      document.getElementById('topCountrySelect').value = code;
+
+      const cfg = COUNTRY_CONFIG[code];
+      document.getElementById('custPincode').placeholder = cfg.pinPlaceholder;
+      document.getElementById('partnerPlanBox').innerHTML = `
+        <strong style="color:#b45309;font-size:14.5px;">🏪 NeedHub Online Shop Plan (${cfg.flag} ${cfg.name}):</strong><br/>
+        • <strong>Subscription Model:</strong> ${cfg.trialText}<br/>
+        • <strong>How It Works:</strong> Register your profile &amp; service postal code → Complete trial activation → Receive direct customer bookings with <strong>0% Commission</strong>!
+      `;
+      renderServiceCards();
+      if (document.getElementById('custPincode').value.trim().length >= 3) {
+        checkPincodeAvailability();
+      }
+    }
+
+    function checkPincodeAvailability() {
+      const pin = document.getElementById('custPincode').value.trim().toUpperCase();
+      const resBox = document.getElementById('pinStatusResult');
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      resBox.style.display = 'block';
+      resBox.className = 'pin-status';
+
+      if (pin.length < 3) {
+        resBox.classList.add('pin-no');
+        resBox.innerText = '⚠️ Please enter a valid Postal / ZIP / Pincode.';
+        return false;
+      }
+
+      const matchedTechs = liveTechs.filter(t => String(t.pincode || '').trim().toUpperCase() === pin && t.isActive === true);
+      const matchedAdminPin = livePincodes.find(p => String(p.pin || '').trim().toUpperCase() === pin);
+
+      if (matchedTechs.length > 0 || matchedAdminPin) {
+        const areaName = matchedAdminPin ? matchedAdminPin.area : matchedTechs[0].area;
+        resBox.classList.add('pin-ok');
+        resBox.innerText = `✅ Service Available in Your Area! (${cfg.flag} ${pin} - ${areaName})`;
+        return true;
+      } else {
+        resBox.classList.add('pin-warn');
+        resBox.innerText = `⚡ ${cfg.flag} ${cfg.name} (${pin}): On-Demand Express Booking Open! Nearest verified NeedHub partner will be assigned.`;
+        return true;
+      }
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      ['btnEn','btnGu','btnHi','rLangEn','rLangGu','rLangHi'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      });
+      document.getElementById(lang === 'gu' ? 'btnGu' : (lang === 'hi' ? 'btnHi' : 'btnEn')).classList.add('active');
+      document.getElementById(lang === 'gu' ? 'rLangGu' : (lang === 'hi' ? 'rLangHi' : 'rLangEn')).classList.add('active');
+
+      if (lang === 'gu') {
+        document.getElementById('tCustRoleTitle').innerText = 'મારે સર્વિસ જોઈએ છે (Customer)';
+        document.getElementById('tCustRoleSub').innerText = 'ઘરકામ, રસોઈ (Home Cook), ઈલેક્ટ્રિશિયન, પ્લમ્બર, સફાઈ બુક કરો';
+        document.getElementById('tPartRoleTitle').innerText = 'હું કારીગર / વર્કર છું (Partner)';
+        document.getElementById('tPartRoleSub').innerText = 'તમારી ઓનલાઈન દુકાન ખોલો — 30 દિવસ ટ્રાયલ પછી 0% કમિશન';
+        document.getElementById('lblPinCheck').innerText = '📍 તમારા વિસ્તારનો Postal / ZIP / Pincode નાખી સર્વિસ ચેક કરો:';
+        document.getElementById('lblSelectSrv').innerText = '૧. આજે કઈ જરૂરિયાત છે? (Select Need)';
+        document.getElementById('lblCustForm').innerText = '૨. ગ્રાહક અને સરનામાની વિગત';
+        document.getElementById('btnBookNow').innerText = '✅ લાઈવ બુકિંગ કન્ફર્મ કરો';
+      } else if (lang === 'hi') {
+        document.getElementById('tCustRoleTitle').innerText = 'मुझे सर्विस चाहिए (Customer)';
+        document.getElementById('tCustRoleSub').innerText = 'घर का काम, खाना बनाना (Home Cook), बिजली, प्लंबर, सफाई बुक करें';
+        document.getElementById('tPartRoleTitle').innerText = 'मैं कारीगर / वर्कर हूँ (Partner)';
+        document.getElementById('tPartRoleSub').innerText = 'अपनी ऑनलाइन दुकान खोलें — 30 दिन ट्रायल के बाद 0% कमीशन';
+        document.getElementById('lblPinCheck').innerText = '📍 अपने एरिया का Postal / ZIP / Pincode डालकर सर्विस चेक करें:';
+        document.getElementById('lblSelectSrv').innerText = '१. आज क्या काम करवाना है? (Select Need)';
+        document.getElementById('lblCustForm').innerText = '२. ग्राहक और पते का विवरण';
+        document.getElementById('btnBookNow').innerText = '✅ लाइव बुकिंग कन्फर्म करें';
+      } else {
+        document.getElementById('tCustRoleTitle').innerText = 'I Need a Service (Customer)';
+        document.getElementById('tCustRoleSub').innerText = 'Book Cleaning, Home Cook, Electrician, Plumber, Handyman & more';
+        document.getElementById('tPartRoleTitle').innerText = 'I am a Worker / Service Partner';
+        document.getElementById('tPartRoleSub').innerText = 'Open your Online Shop — 30-Day Trial then 0% Commission Annual Plan';
+        document.getElementById('lblPinCheck').innerText = '📍 Enter your Postal / ZIP / Pincode to check availability in your area:';
+        document.getElementById('lblSelectSrv').innerText = '1. Choose What You Need Today';
+        document.getElementById('lblCustForm').innerText = '2. Your Contact & Address Details';
+        document.getElementById('btnBookNow').innerText = '✅ Confirm Live Booking';
+      }
+      renderServiceCards();
+      renderBottomNav();
+    }
+
+    function renderBottomNav() {
+      const nav = document.getElementById('dynamicBottomNav');
+      if (activeRole === 'customer') {
+        nav.innerHTML = `
+          <button id="btnNav1" class="active" onclick="showSection('secCustBook', 'btnNav1')">🌐 Book Need</button>
+          <button id="btnNav2" onclick="showSection('secCustOrders', 'btnNav2')">📋 My Bookings</button>
+        `;
+      } else if (activeRole === 'partner') {
+        nav.innerHTML = `
+          <button id="btnNav1" class="active" onclick="showSection('secPartnerJobs', 'btnNav1')">🔔 Live Jobs</button>
+          <button id="btnNav2" onclick="showSection('secPartnerProfile', 'btnNav2')">🏪 Online Shop</button>
+        `;
+      } else if (activeRole === 'admin') {
+        nav.innerHTML = `
+          <button id="btnNav1" class="active" onclick="showSection('secAdminDash', 'btnNav1')">📊 Global Admin</button>
+          <button id="btnNav2" onclick="showSection('secPartnerJobs', 'btnNav2')">🔔 All Jobs</button>
+        `;
+      }
+    }
+
+    function checkPartnerUnlock() {
+      const inputEl = document.getElementById('partnerLoginMob');
+      if (inputEl && inputEl.value.trim()) {
+        savedPartnerMobile = inputEl.value.trim();
+        localStorage.setItem('needhub_partner_mob', savedPartnerMobile);
+      } else if (inputEl && savedPartnerMobile) {
+        inputEl.value = savedPartnerMobile;
+      }
+
+      const lockBox = document.getElementById('partnerLockScreen');
+      const unlockBox = document.getElementById('partnerUnlockedBox');
+      const statusMsg = document.getElementById('partnerUnlockStatus');
+      if (!lockBox || !unlockBox) return;
+
+      if (activeRole === 'admin') {
+        lockBox.style.display = 'none';
+        unlockBox.style.display = 'block';
+        return;
+      }
+
+      const cleanInput = String(savedPartnerMobile).replace(/\D/g, '').slice(-8);
+      const matchedPartner = liveTechs.find(t =>
+        cleanInput.length >= 6 &&
+        String(t.mobile || '').replace(/\D/g, '').slice(-8) === cleanInput
+      );
+
+      if (matchedPartner && matchedPartner.isActive === true) {
+        lockBox.style.display = 'none';
+        unlockBox.style.display = 'block';
+      } else {
+        lockBox.style.display = 'block';
+        unlockBox.style.display = 'none';
+        if (matchedPartner) {
+          statusMsg.innerText = `⏳ ${matchedPartner.name} (${matchedPartner.mobile}) — Registration received, awaiting Trial Plan activation!`;
+        } else if (savedPartnerMobile) {
+          statusMsg.innerText = `❌ Number (${savedPartnerMobile}) not found. Please register your Online Shop first.`;
+        }
+      }
+    }
+
+    function sendPaymentProofWA() {
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      const name = document.getElementById('techName').value.trim() || 'Partner';
+      const mob = document.getElementById('techMobile').value.trim() || savedPartnerMobile || '-';
+      const pin = document.getElementById('techPincode').value.trim() || '-';
+      let msg = `*NEEDHUB GLOBAL - PARTNER TRIAL ACTIVATION*\nCountry: ${cfg.flag} *${cfg.name}*\nName: *${name}*\nPhone: *${mob}*\nPostal Code: *${pin}*\nPlan: ${cfg.trialText}\nPlease activate my NeedHub Online Shop account.`;
+      window.open(`https://wa.me/919106743538?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    async function syncFromCloud() {
+      try {
+        const [ordRes, techRes, pinRes] = await Promise.all([
+          fetch(`${DB_URL}/orders.json`),
+          fetch(`${DB_URL}/techs.json`),
+          fetch(`${DB_URL}/pincodes.json`)
+        ]);
+        const ordData = await ordRes.json();
+        const techData = await techRes.json();
+        const pinData = await pinRes.json();
+
+        liveOrders = ordData ? Object.keys(ordData).map(k => ({ firebaseKey: k, ...ordData[k] })).reverse() : [];
+        liveTechs = techData ? Object.keys(techData).map(k => ({ firebaseKey: k, ...techData[k] })).reverse() : [];
+        livePincodes = pinData ? Object.keys(pinData).map(k => ({ firebaseKey: k, ...pinData[k] })).reverse() : [];
+
+        checkPartnerUnlock();
+        renderCustOrders();
+        renderPartnerJobs();
+        renderAdminData();
+      } catch (err) {
+        console.error("Cloud sync error:", err);
+      }
+    }
+
+    setInterval(() => {
+      if (document.getElementById('mainApp').style.display === 'block') syncFromCloud();
+    }, 6000);
+
+    function openAdminPrompt() {
+      const box = document.getElementById('adminPinBox');
+      box.style.display = (box.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function verifyAdmin() {
+      if (document.getElementById('adminPinInput').value.trim() === '3538') {
+        enterRole('admin');
+      } else {
+        alert('Wrong Admin PIN!');
+      }
+    }
+
+    function switchRoleScreen() {
+      document.getElementById('mainApp').style.display = 'none';
+      document.getElementById('roleScreen').style.display = 'flex';
+      document.getElementById('adminPinInput').value = '';
+    }
+
+    function enterRole(role) {
+      activeRole = role;
+      document.getElementById('roleScreen').style.display = 'none';
+      document.getElementById('mainApp').style.display = 'block';
+      changeCountry(currentCountry);
+
+      const badge = document.getElementById('roleSubBadge');
+      if (role === 'customer') {
+        badge.innerText = 'Customer Portal • Worldwide Daily Needs';
+        renderBottomNav();
+        showSection('secCustBook', 'btnNav1');
+      } else if (role === 'partner') {
+        badge.innerText = 'Partner Online Shop • 0% Commission';
+        renderBottomNav();
+        showSection('secPartnerJobs', 'btnNav1');
+        checkPartnerUnlock();
+      } else if (role === 'admin') {
+        badge.innerText = 'NeedHub Global Owner • Jayavirbhai Makwana';
+        renderBottomNav();
+        showSection('secAdminDash', 'btnNav1');
+      }
+      syncFromCloud();
+    }
+
+    function showSection(secId, navBtnId) {
+      document.querySelectorAll('.app-section').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.bottom-nav button').forEach(el => el.classList.remove('active'));
+      document.getElementById(secId).style.display = 'block';
+      if (document.getElementById(navBtnId)) document.getElementById(navBtnId).classList.add('active');
+      if (secId === 'secPartnerJobs') checkPartnerUnlock();
+    }
+
+    function selectService(el, name, fee) {
+      document.querySelectorAll('.srv-box').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      currentService = name;
+      currentFee = fee;
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      document.getElementById('selectedSrvName').innerText = name;
+      document.getElementById('selectedSrvFee').innerText = cfg.symbol + fee;
+    }
+
+    async function bookService() {
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      const pincode = document.getElementById('custPincode').value.trim().toUpperCase();
+      const name = document.getElementById('custName').value.trim();
+      const mobile = document.getElementById('custMobile').value.trim();
+      const area = document.getElementById('custArea').value.trim() || cfg.name;
+      const slot = document.getElementById('custSlot').value;
+      const problem = document.getElementById('custProblem').value.trim();
+
+      if (pincode.length < 3 || !name || !mobile) {
+        return alert('Please enter Postal/ZIP Code, Name & Phone Number.');
+      }
+
+      const newOrder = {
+        id: 'NH-' + Math.floor(1001 + Math.random() * 8999),
+        date: new Date().toLocaleDateString('en-GB'),
+        country: `${cfg.flag} ${cfg.name}`,
+        currency: cfg.symbol,
+        service: currentService,
+        fee: currentFee,
+        finalBill: currentFee,
+        pincode,
+        name,
+        mobile,
+        area,
+        slot,
+        problem: problem || 'Standard Service Request',
+        status: 'New',
+        techAssigned: 'Assigning Verified Partner...'
+      };
+
+      await fetch(`${DB_URL}/orders.json`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newOrder)
+      });
+
+      document.getElementById('custName').value = '';
+      document.getElementById('custMobile').value = '';
+      document.getElementById('custProblem').value = '';
+
+      await syncFromCloud();
+      alert(`✅ Booking Confirmed on NeedHub! Order ID: ${newOrder.id} (${cfg.flag} ${pincode})`);
+      showSection('secCustOrders', 'btnNav2');
+    }
+
+    function bookViaWhatsApp() {
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      const pincode = document.getElementById('custPincode').value.trim() || '-';
+      const name = document.getElementById('custName').value.trim() || 'Customer';
+      const mobile = document.getElementById('custMobile').value.trim() || '-';
+      const area = document.getElementById('custArea').value.trim() || cfg.name;
+      const problem = document.getElementById('custProblem').value.trim() || 'Service Request';
+
+      let msg = `*NEEDHUB GLOBAL - NEW BOOKING*\nCountry: ${cfg.flag} *${cfg.name}*\nService: *${currentService}* (${cfg.symbol}${currentFee})\nPostal/ZIP: *${pincode}*\nName: *${name}*\nPhone: ${mobile}\nCity/Area: ${area}\nDetails: ${problem}`;
+      window.open(`https://wa.me/919106743538?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function renderCustOrders() {
+      const box = document.getElementById('custOrdersList');
+      if (!box) return;
+      if (liveOrders.length === 0) {
+        box.innerHTML = '<p style="font-size:13px;color:#64748b;">No bookings yet.</p>';
+        return;
+      }
+      box.innerHTML = liveOrders.map((o, idx) => {
+        let badgeClass = o.status === 'New' ? 'badge-new' : (o.status === 'Accepted' ? 'badge-accepted' : 'badge-done');
+        const sym = o.currency || '$';
+        return `
+          <div class="job-item">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong>${o.service} (${o.id})</strong>
+              <span class="badge ${badgeClass}">${o.status}</span>
+            </div>
+            <div style="font-size:12.5px;color:#334155;margin-top:5px;">
+              👤 ${o.name} | ${o.country || ''} • ${o.area} (${o.pincode || ''}) | 📅 ${o.date || ''}<br/>
+              👷 Partner: <strong>${o.techAssigned}</strong> | 💰 Total: <strong>${sym}${o.finalBill}</strong>
+            </div>
+            <div style="margin-top:8px;">
+              <button class="btn btn-primary" style="width:auto;padding:6px 12px;font-size:12px;" onclick="openReceipt(${idx})">🧾 Digital PDF Invoice</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPartnerJobs() {
+      const box = document.getElementById('partnerJobsList');
+      if (!box) return;
+      document.getElementById('partnerJobBadge').innerText = liveOrders.length + ' Live Jobs';
+      if (liveOrders.length === 0) {
+        box.innerHTML = '<p style="font-size:13px;color:#64748b;">No live requests right now.</p>';
+        return;
+      }
+      box.innerHTML = liveOrders.map((o, idx) => {
+        let badgeClass = o.status === 'New' ? 'badge-new' : (o.status === 'Accepted' ? 'badge-accepted' : 'badge-done');
+        const sym = o.currency || '$';
+        return `
+          <div class="job-item">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong>${o.service} (${o.id})</strong>
+              <span class="badge ${badgeClass}">${o.status}</span>
+            </div>
+            <div style="font-size:12.5px;color:#334155;margin:5px 0;">
+              👤 <strong>${o.name}</strong> (<a href="tel:${o.mobile}">${o.mobile}</a>) | ${o.country || ''} • ${o.area} | 📮 Code: <strong>${o.pincode || '-'}</strong><br/>
+              📝 ${o.problem}<br/>
+              👷 Assigned: <strong>${o.techAssigned}</strong> | 💰 Amount: <strong>${sym}${o.finalBill}</strong>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+              ${o.status === 'New' ? `<button class="btn btn-primary" style="width:auto;padding:6px 12px;font-size:12px;" onclick="acceptJob(${idx})">✅ Accept Request</button>` : ''}
+              ${o.status !== 'Completed' ? `<button class="btn btn-success" style="width:auto;padding:6px 12px;font-size:12px;" onclick="completeJob(${idx})">💰 Complete &amp; Invoice</button>` : ''}
+              <button class="btn btn-warning" style="width:auto;padding:6px 12px;font-size:12px;" onclick="openReceipt(${idx})">🧾 PDF Invoice</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function acceptJob(idx) {
+      const order = liveOrders[idx];
+      const tech = prompt('Enter Your Name / Shop Name:', 'NeedHub Verified Partner');
+      if (tech && order.firebaseKey) {
+        await fetch(`${DB_URL}/orders/${order.firebaseKey}.json`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'Accepted', techAssigned: tech })
+        });
+        syncFromCloud();
+      }
+    }
+
+    async function completeJob(idx) {
+      const order = liveOrders[idx];
+      const bill = parseFloat(prompt(`Enter Final Invoice Amount (${order.currency || '$'}):`, order.fee));
+      if (!isNaN(bill) && bill > 0 && order.firebaseKey) {
+        await fetch(`${DB_URL}/orders/${order.firebaseKey}.json`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'Completed', finalBill: bill })
+        });
+        await syncFromCloud();
+        openReceipt(idx);
+      }
+    }
+
+    function openReceipt(idx) {
+      const o = liveOrders[idx];
+      if (!o) return;
+      const sym = o.currency || '$';
+      document.getElementById('receiptContent').innerHTML = `
+        <table style="width:100%;border-collapse:collapse;">
+          <tr><td><strong>Invoice No:</strong></td><td style="text-align:right;">${o.id}</td></tr>
+          <tr><td><strong>Date:</strong></td><td style="text-align:right;">${o.date || ''}</td></tr>
+          <tr><td><strong>Customer:</strong></td><td style="text-align:right;">${o.name}</td></tr>
+          <tr><td><strong>Phone:</strong></td><td style="text-align:right;">${o.mobile}</td></tr>
+          <tr><td><strong>Location:</strong></td><td style="text-align:right;">${o.country || ''} • ${o.area} (${o.pincode || ''})</td></tr>
+          <tr><td><strong>Service:</strong></td><td style="text-align:right;">${o.service}</td></tr>
+          <tr><td><strong>Partner:</strong></td><td style="text-align:right;">${o.techAssigned}</td></tr>
+          <tr><td><strong>Status:</strong></td><td style="text-align:right;">${o.status}</td></tr>
+          <tr style="border-top:2px solid #0f172a;font-size:16px;">
+            <td style="padding-top:8px;"><strong>Total Amount:</strong></td>
+            <td style="text-align:right;padding-top:8px;color:#15803d;"><strong>${sym}${o.finalBill}</strong></td>
+          </tr>
+        </table>
+        <p style="font-size:11px;color:#64748b;margin-top:10px;text-align:center;">Thank you for using NeedHub Global!</p>
+      `;
+      document.getElementById('btnShareBillWA').onclick = () => {
+        let msg = `*🧾 NEEDHUB GLOBAL - DIGITAL INVOICE*\nInvoice No: *${o.id}*\nCustomer: *${o.name}*\nLocation: ${o.country || ''} • ${o.area} (${o.pincode || ''})\nService: *${o.service}*\nPartner: ${o.techAssigned}\nTotal Amount: *${sym}${o.finalBill}*\nStatus: ${o.status}`;
+        window.open(`https://wa.me/${o.mobile.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+      };
+      document.getElementById('receiptModal').style.display = 'flex';
+    }
+
+    function closeReceipt() {
+      document.getElementById('receiptModal').style.display = 'none';
+    }
+
+    async function registerTech() {
+      const cfg = COUNTRY_CONFIG[currentCountry];
+      const name = document.getElementById('techName').value.trim();
+      const mobile = document.getElementById('techMobile').value.trim();
+      const skill = document.getElementById('techSkill').value;
+      const area = document.getElementById('techArea').value.trim() || cfg.name;
+      const pincode = document.getElementById('techPincode').value.trim().toUpperCase();
+
+      if (!name || !mobile || pincode.length < 3) {
+        return alert('Please enter Name, Phone Number & Service Postal Code.');
+      }
+
+      savedPartnerMobile = mobile;
+      localStorage.setItem('needhub_partner_mob', mobile);
+
+      await fetch(`${DB_URL}/techs.json`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, mobile, skill, area, pincode,
+          country: `${cfg.flag} ${cfg.name}`,
+          isActive: false,
+          plan: `Locked (Pending ${cfg.symbol} Trial)`,
+          joinedDate: new Date().toLocaleDateString('en-GB')
+        })
+      });
+
+      await syncFromCloud();
+      alert(`✅ Online Shop Registered!\nPlease message Admin via WhatsApp to activate your 30-Day Trial and unlock Live Jobs.`);
+      showSection('secPartnerJobs', 'btnNav1');
+    }
+
+    async function togglePartnerStatus(firebaseKey, currentStatus) {
+      const newStatus = !currentStatus;
+      const newPlan = newStatus ? '✅ Active (30-Day Trial / Annual Online Shop)' : '🔒 Locked (Pending Activation)';
+      await fetch(`${DB_URL}/techs/${firebaseKey}.json`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isActive: newStatus, plan: newPlan })
+      });
+      syncFromCloud();
+    }
+
+    async function addAdminPincode() {
+      const pin = document.getElementById('adminNewPin').value.trim().toUpperCase();
+      const area = document.getElementById('adminNewPinArea').value.trim() || 'Global Active Zone';
+      if (pin.length < 3) return alert('Enter valid Postal/ZIP code.');
+
+      await fetch(`${DB_URL}/pincodes.json`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin, area })
+      });
+      document.getElementById('adminNewPin').value = '';
+      document.getElementById('adminNewPinArea').value = '';
+      syncFromCloud();
+    }
+
+    async function deleteAdminPincode(key) {
+      if (confirm('Remove this Postal Zone?')) {
+        await fetch(`${DB_URL}/pincodes/${key}.json`, { method: 'DELETE' });
+        syncFromCloud();
+      }
+    }
+
+    function renderAdminData() {
+      const totalEl = document.getElementById('statTotalJobs');
+      if (!totalEl) return;
+      const completed = liveOrders.filter(o => o.status === 'Completed');
+      const activeCount = liveTechs.filter(t => t.isActive === true).length;
+
+      totalEl.innerText = liveOrders.length;
+      document.getElementById('statGrossAmt').innerText = completed.length;
+      document.getElementById('statCommission').innerText = activeCount + ' / ' + liveTechs.length;
+
+      const pinBox = document.getElementById('adminPincodeList');
+      if (pinBox) {
+        pinBox.innerHTML = livePincodes.map(p => `
+          <span class="badge badge-done" style="display:inline-flex;align-items:center;gap:6px;margin:3px;">
+            📍 ${p.pin} (${p.area}) <b style="cursor:pointer;color:#dc2626;" onclick="deleteAdminPincode('${p.firebaseKey}')">✕</b>
+          </span>
+        `).join('');
+      }
+
+      const box = document.getElementById('adminTechList');
+      if (liveTechs.length === 0) {
+        box.innerHTML = '<p style="font-size:13px;color:#64748b;">No registered global partners yet.</p>';
+        return;
+      }
+      box.innerHTML = liveTechs.map(t => {
+        const isAct = t.isActive === true;
+        return `
+          <div class="job-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div>
+              <strong>👷 ${t.name}</strong> (${t.skill})
+              <span class="badge ${isAct ? 'badge-done' : 'badge-locked'}">${isAct ? 'UNLOCKED' : 'LOCKED'}</span><br/>
+              <small>${t.country || ''} • ${t.area} | 📮 Code: <strong>${t.pincode || '-'}</strong> | 📞 ${t.mobile}</small><br/>
+              <small style="color:#b45309;font-weight:700;">Status: ${t.plan || 'Locked'}</small>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn ${isAct ? 'btn-danger' : 'btn-success'}" style="width:auto;padding:6px 12px;font-size:12px;" onclick="togglePartnerStatus('${t.firebaseKey}', ${isAct})">
+                ${isAct ? '🔒 Lock' : '✅ Activate Partner'}
+              </button>
+              <a href="tel:${t.mobile}" class="btn btn-primary" style="width:auto;padding:6px 10px;text-decoration:none;font-size:12px;">📞</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Initialize default country & services on load
+    changeCountry('IN');
+  </script>
+</body>
+</html>
