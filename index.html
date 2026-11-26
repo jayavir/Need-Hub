@@ -1102,5 +1102,86 @@
     // Initialize default country & services on load
     changeCountry('IN');
   </script>
+  <div id="needhubSubscriptionBox" style="background:#0f172a;color:#fff;border:1px solid #334155;border-radius:16px;padding:20px;max-width:520px;margin:16px auto;">
+  <h3 style="margin:0 0 6px;color:#fbbf24;">NeedHub Global Partner Subscription</h3>
+  <p style="margin:0 0 16px;color:#cbd5e1;font-size:14px;">
+    Start with a 30-day trial or choose the annual plan to unlock active partner leads.
+  </p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:#1e293b;padding:14px;border-radius:12px;border:1px solid #475569;">
+      <div style="font-size:13px;color:#94a3b8;">30 Days Trial</div>
+      <div style="font-size:24px;font-weight:800;color:#fbbf24;margin:6px 0;">$11</div>
+      <div style="font-size:12px;color:#cbd5e1;margin-bottom:12px;">Valid for 30 days</div>
+      <button type="button" onclick="openNeedHubPayment('trial')" style="width:100%;padding:10px;border:none;border-radius:8px;background:#f59e0b;color:#0f172a;font-weight:700;cursor:pointer;">
+        Pay $11 Trial
+      </button>
+    </div>
+
+    <div style="background:#1e293b;padding:14px;border-radius:12px;border:1px solid #f59e0b;">
+      <div style="font-size:13px;color:#fbbf24;">Annual Plan</div>
+      <div style="font-size:24px;font-weight:800;color:#ffffff;margin:6px 0;">$510</div>
+      <div style="font-size:12px;color:#cbd5e1;margin-bottom:12px;">Valid for 365 days</div>
+      <button type="button" onclick="openNeedHubPayment('annual')" style="width:100%;padding:10px;border:none;border-radius:8px;background:#ea580c;color:#ffffff;font-weight:700;cursor:pointer;">
+        Pay $510 Annual
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const NEEDHUB_SUBSCRIPTION_CONFIG = {
+    trial: {
+      id: "trial_30d",
+      label: "30 Days Trial",
+      price: "$11",
+      days: 30,
+      paymentLink: ""
+    },
+    annual: {
+      id: "annual_365d",
+      label: "Annual Plan",
+      price: "$510",
+      days: 365,
+      paymentLink: ""
+    },
+    adminPin: "3538"
+  };
+
+  function openNeedHubPayment(planType) {
+    const plan = NEEDHUB_SUBSCRIPTION_CONFIG[planType];
+    if (!plan) return;
+
+    if (plan.paymentLink && plan.paymentLink.trim() !== "") {
+      window.open(plan.paymentLink, "_blank", "noopener,noreferrer");
+    } else {
+      alert(
+        plan.label + " (" + plan.price + ") payment link is not added yet. " +
+        "After payment confirmation, contact admin or use Global Admin Panel (PIN: 3538) to activate."
+      );
+    }
+  }
+
+  function adminActivatePartnerSubscription(partnerId, planType, enteredPin) {
+    if (String(enteredPin) !== NEEDHUB_SUBSCRIPTION_CONFIG.adminPin) {
+      alert("Invalid Admin PIN!");
+      return null;
+    }
+
+    const plan = NEEDHUB_SUBSCRIPTION_CONFIG[planType] || NEEDHUB_SUBSCRIPTION_CONFIG.trial;
+    const now = Date.now();
+    const expiryTime = now + plan.days * 24 * 60 * 60 * 1000;
+
+    return {
+      partnerId: partnerId,
+      planId: plan.id,
+      planLabel: plan.label,
+      amount: plan.price,
+      status: "active",
+      activatedAt: new Date(now).toISOString(),
+      expiresAt: new Date(expiryTime).toISOString()
+    };
+  }
+</script>
 </body>
 </html>
